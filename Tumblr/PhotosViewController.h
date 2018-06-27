@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "UIImageView+AFNetworking.h"
+
 @interface PhotosViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

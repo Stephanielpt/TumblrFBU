@@ -8,10 +8,11 @@
 
 #import "PhotosViewController.h"
 #import "PhotoCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface PhotosViewController ()
 
-@property (weak, nonatomic) IBOutlet UITableView *photoTableView;
+@property (strong, nonatomic) IBOutlet UITableView *photoTableView;
 @property (strong, nonatomic) NSArray *posts;
 
 @end
@@ -31,11 +32,14 @@
         }
         else {
             NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            
+            NSLog(@"HI");
             // TODO: Get the posts and store in posts property
             NSDictionary *responseDictionary = dataDictionary[@"response"];
-            // TODO: Reload the table view
             self.posts = responseDictionary[@"posts"];
+            
+            // TODO: Reload the table view
+            
+            [self.photoTableView reloadData];
         }
     }];
     [task resume];
@@ -43,8 +47,7 @@
     self.photoTableView.dataSource = self;
     self.photoTableView.delegate = self;
 
-    
-    
+    self.photoTableView.rowHeight = 240;
     
 }
 
@@ -70,16 +73,14 @@
         
         // 4. Create a URL using the urlString
         NSURL *url = [NSURL URLWithString:urlString];
+        
+        NSLog(@"%@",urlString);
+        [cell.imageViewCell setImageWithURL:url];
     }
     
     return cell;
 }
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [[UITableViewCell alloc] init];
-//    cell.textLabel.text = [NSString stringWithFormat:@"This is row %ld", (long)indexPath.row];
-//
-//    return cell;
-//}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
