@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  PhotosViewController.h
 //  Tumblr
 //
 //  Created by Stephanie Lampotang on 6/27/18.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface PhotosViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end
-
